@@ -36,7 +36,7 @@ exports.SPIDER_API_BASE_URL = "https://api.spiderx.com.br/api";
 exports.SPIDER_API_TOKEN = "seu_token_aqui";
 
 // Caso queira responder apenas um grupo específico, coloque o ID dele aqui (ex: 120363023799506419@g.us). Apenas para testes internos!
-exports.ONLY_GROUP_ID = "";
+exports.ONLY_GROUP_ID = "KW1L1CPv2Vn96UXgsUQF9d";
 
 // Diretório base do projeto.
 exports.BASE_DIR = path.resolve(__dirname);
