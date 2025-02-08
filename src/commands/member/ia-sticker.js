@@ -19,7 +19,7 @@ module.exports = {
     }
 
     const descricao = args.join(" ");
-    const apiUrl = `https://api.spiderx.com.br/api/ai/stable-diffusion-turbo?search=${encodeURIComponent(descricao)}&api_key=${SPIDER_API_TOKEN}`;
+    const apiUrl = `${SPIDER_API_BASE_URL}/ai/stable-diffusion-turbo?search=${encodeURIComponent(descricao)}&api_key=${SPIDER_API_TOKEN}`;
 
     await sendWaitReply("Gerando figurinha...");
 
