@@ -1,4 +1,4 @@
-# 🤖 Takeshi Bot
+# 🤖 Junin Bot
 
 <div align="center">
     <img src="./assets/images/takeshi-bot.png" width="500">
@@ -100,13 +100,13 @@ exports.PREFIX = "/";
 exports.BOT_EMOJI = "🤖";
 
 // Nome do bot (mude se preferir).
-exports.BOT_NAME = "Takeshi Bot";
+exports.BOT_NAME = "JUNIN BOT";
 
 // Número do bot. Coloque o número do bot (apenas números).
-exports.BOT_NUMBER = "5511920202020";
+exports.BOT_NUMBER = "5521992567993";
 
 // Número do dono do bot. Coloque o número do dono do bot (apenas números).
-exports.OWNER_NUMBER = "5511999999999";
+exports.OWNER_NUMBER = "5521992567993";
 ```
 
 12 - Inicie o bot novamente.
@@ -161,7 +161,7 @@ O Takeshi Bot possui um auto-responder embutido, edite o arquivo em `./database/
     },
     {
         "match": "Qual seu nome",
-        "answer": "Meu nome é Taeshi Bot"
+        "answer": "Meu nome é  JUNIN Bot"
     },
 
     // coloque mais objetos json
