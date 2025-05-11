@@ -5,14 +5,14 @@ module.exports = {
   description: "Abraça um usuário desejado.",
   commands: ["abracar"],
   usage: `${PREFIX}abracar @usuario`,
-  handle: async ({ socket, webMessage, sendErrorReply, userJid, remoteJid }) => {
+  handle: async ({ socket, webMessage, sendErrorReply, userJid, remoteJid, replyJid }) => {
     const mentionedJid = webMessage?.message?.extendedTextMessage?.contextInfo?.mentionedJid || [];
+    const target = replyJid || (mentionedJid.length ? mentionedJid[0] : null);
 
-    if (!mentionedJid.length) {
-      return sendErrorReply('Você precisa mencionar um usuário para Abraçar.');
+    if (!target) {
+      return sendErrorReply('Você precisa mencionar um usuário ou responder uma mensagem para Abraçar.');
     }
 
-    const target = mentionedJid[0];
     const user = userJid.split("@")[0];
     const targetUser = target.split("@")[0];
 

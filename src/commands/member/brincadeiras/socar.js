@@ -5,14 +5,14 @@ module.exports = {
   description: "Bate em um usuário com um soco",
   commands: ["socar"],
   usage: `${PREFIX}socar @usuario`,
-  handle: async ({ socket, webMessage, sendErrorReply, userJid, remoteJid }) => {
+  handle: async ({ socket, webMessage, sendErrorReply, userJid, remoteJid, replyJid }) => {
     const mentionedJid = webMessage?.message?.extendedTextMessage?.contextInfo?.mentionedJid || [];
+    const target = replyJid || (mentionedJid.length ? mentionedJid[0] : null);
 
-    if (!mentionedJid.length) {
-      return sendErrorReply('Você precisa mencionar um usuário para socar.');
+    if (!target) {
+      return sendErrorReply('Você precisa mencionar um usuário ou responder uma mensagem para socar.');
     }
 
-    const target = mentionedJid[0];
     const user = userJid.split("@")[0];
     const targetUser = target.split("@")[0];
 

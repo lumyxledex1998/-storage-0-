@@ -1,4 +1,4 @@
-// O comando a seguir só ira funcionar se seu bot estar no PM2, caso contrario, ele vai dar crash.
+// O comando a seguir so ira funcionar se seu bot estar no PM2, caso contrario, ele vai dar crash.
 
 const { exec } = require("child_process");
 const { PREFIX } = require(`${BASE_DIR}/config`);
@@ -12,8 +12,10 @@ module.exports = {
     await sendReply("Reiniciando o bot...");
     await sendSuccessReact();
 
+
+// Altere o exec para o nome do seu bot no pm2
     setTimeout(() => {
-      exec("pm2 restart botzaph || npm run start", (err, stdout, stderr) => {
+      exec("pm2 restart takeshi-bot || npm run start", (err, stdout, stderr) => {
         if (err) {
           console.error("Erro ao reiniciar:", err);
           return;

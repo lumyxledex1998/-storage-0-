@@ -2,17 +2,24 @@ const { PREFIX } = require(`${BASE_DIR}/config`);
 
 module.exports = {
   name: "Tapa",
-  description: "Dá. um tapa em alguém",
-  commands: ["Tapa"],
-  usage: `${PREFIX}tapa @usuario`,
+  description: "Dá um tapa em alguém",
+  commands: ["tapa"],
+  usage: `${PREFIX}tapa @usuario ou reply`,
   handle: async ({ socket, webMessage, sendErrorReply, userJid, remoteJid }) => {
-    const mentionedJid = webMessage?.message?.extendedTextMessage?.contextInfo?.mentionedJid || [];
-
-    if (!mentionedJid.length) {
-      return sendErrorReply('Você precisa mencionar um usuário para dar um Tapa.');
+    let target;
+    
+    if (webMessage?.message?.extendedTextMessage?.contextInfo?.participant) {
+      target = webMessage.message.extendedTextMessage.contextInfo.participant;
+    } 
+    
+    else if (webMessage?.message?.extendedTextMessage?.contextInfo?.mentionedJid?.length > 0) {
+      target = webMessage.message.extendedTextMessage.contextInfo.mentionedJid[0];
+    } 
+    
+    else {
+      return sendErrorReply('Você precisa mencionar um usuário ou responder uma mensagem para dar um Tapa.');
     }
 
-    const target = mentionedJid[0];
     const user = userJid.split("@")[0];
     const targetUser = target.split("@")[0];
 

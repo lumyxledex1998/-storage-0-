@@ -5,14 +5,14 @@ module.exports = {
   description: "Mata um usuário desejado.",
   commands: ["matar"],
   usage: `${PREFIX}matar @usuario`,
-  handle: async ({ socket, webMessage, sendErrorReply, userJid, remoteJid }) => {
+  handle: async ({ socket, webMessage, sendErrorReply, userJid, remoteJid, replyJid }) => {
     const mentionedJid = webMessage?.message?.extendedTextMessage?.contextInfo?.mentionedJid || [];
+    const target = replyJid || (mentionedJid.length ? mentionedJid[0] : null);
 
-    if (!mentionedJid.length) {
-      return sendErrorReply('Você precisa mencionar um usuário para Matar.');
+    if (!target) {
+      return sendErrorReply('Você precisa mencionar um usuário ou responder uma mensagem para Matar.');
     }
 
-    const target = mentionedJid[0];
     const user = userJid.split("@")[0];
     const targetUser = target.split("@")[0];
 

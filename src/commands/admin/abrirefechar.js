@@ -16,16 +16,13 @@ module.exports = {
     userJid
   }) => {
     try {
-      // Verifica se o comando está sendo executado em um grupo
       if (!remoteJid.endsWith("@g.us")) {
         await sendWarningReply("Este comando só pode ser usado em grupos.");
         return;
       }
 
-      // Obtém informações do grupo
       const metadata = await socket.groupMetadata(remoteJid);
 
-      // Verifica se o usuário que enviou o comando é administrador
       const sender = metadata.participants.find(
         (participant) => participant.id === userJid
       );
@@ -34,23 +31,21 @@ module.exports = {
         return;
       }
 
-      // Define a ação e a mensagem de status com base no comando
       const openCommands = ["agrupo", "agp"];
       const closeCommands = ["fgrupo", "fgp"];
       let action, statusText;
       
       if (openCommands.includes(commandName)) {
-        action = "not_announcement"; // Permite que todos enviem mensagens
+        action = "not_announcement";
         statusText = "✅ Grupo aberto. Todos os membros podem enviar mensagens.";
       } else if (closeCommands.includes(commandName)) {
-        action = "announcement"; // Apenas administradores podem enviar mensagens
+        action = "announcement";
         statusText = "✅ Grupo fechado. Apenas administradores podem enviar mensagens.";
       } else {
         await sendWarningReply("Comando inválido.");
         return;
       }
 
-      // Atualiza a configuração do grupo usando o método do Baileys
       await socket.groupSettingUpdate(remoteJid, action);
 
       await sendSuccessReact();
