@@ -4,6 +4,7 @@
  * @author Dev Gui
  */
 const { BOT_NAME, PREFIX } = require("../config");
+const packageInfo = require("../../package.json");
 
 exports.waitMessage = "Carregando dados...";
 
@@ -16,12 +17,15 @@ exports.menuMessage = () => {
 ▢ • Data: ${date.toLocaleDateString("pt-br")}
 ▢ • Hora: ${date.toLocaleTimeString("pt-br")}
 ▢ • Prefixo: ${PREFIX}
+▢ • Versão: ${packageInfo.version}
 ▢
 ╰━━─「🪐」─━━
 
 ╭━━⪩ DONO ⪨━━
 ▢
 ▢ • ${PREFIX}get-id
+▢ • ${PREFIX}fechar-sugestao
+▢ • ${PREFIX}exec
 ▢ • ${PREFIX}off
 ▢ • ${PREFIX}on
 ▢
@@ -29,11 +33,16 @@ exports.menuMessage = () => {
 
 ╭━━⪩ ADMINS ⪨━━
 ▢
+▢ • ${PREFIX}abrir
 ▢ • ${PREFIX}anti-link (1/0)
 ▢ • ${PREFIX}auto-responder (1/0)
 ▢ • ${PREFIX}ban
 ▢ • ${PREFIX}exit (1/0)
+▢ • ${PREFIX}fechar
 ▢ • ${PREFIX}hidetag
+▢ • ${PREFIX}agendar-mensagem
+▢ • ${PREFIX}mute
+▢ • ${PREFIX}unmute
 ▢ • ${PREFIX}limpar
 ▢ • ${PREFIX}promover
 ▢ • ${PREFIX}rebaixar
@@ -46,11 +55,17 @@ exports.menuMessage = () => {
 ▢
 ▢ • ${PREFIX}attp
 ▢ • ${PREFIX}cep
+▢ • ${PREFIX}exemplos-de-mensagens
+▢ • ${PREFIX}get-lid
 ▢ • ${PREFIX}google-search
 ▢ • ${PREFIX}perfil
+▢ • ${PREFIX}fake-chat
+▢ • ${PREFIX}rename
+▢ • ${PREFIX}to-hd
+▢ • ${PREFIX}sugestao
 ▢ • ${PREFIX}ping
+▢ • ${PREFIX}raw-message
 ▢ • ${PREFIX}sticker
-▢ • ${PREFIX}tik-tok-search
 ▢ • ${PREFIX}to-image
 ▢ • ${PREFIX}ttp
 ▢ • ${PREFIX}yt-search
@@ -74,13 +89,14 @@ exports.menuMessage = () => {
 ▢ • ${PREFIX}jantar
 ▢ • ${PREFIX}lutar
 ▢ • ${PREFIX}matar
+▢ • ${PREFIX}rolar-dado
 ▢ • ${PREFIX}socar
 ▢
 ╰━━─「🎡」─━━
 
 ╭━━⪩ IA ⪨━━
 ▢
-▢ • ${PREFIX}gpt-4
+▢ • ${PREFIX}gemini
 ▢ • ${PREFIX}ia-sticker
 ▢ • ${PREFIX}pixart
 ▢ • ${PREFIX}stable-diffusion-turbo
@@ -90,6 +106,10 @@ exports.menuMessage = () => {
 ╭━━⪩ CANVAS ⪨━━
 ▢
 ▢ • ${PREFIX}bolsonaro
+▢ • ${PREFIX}blur
+▢ • ${PREFIX}espelhar
+▢ • ${PREFIX}gray
+▢ • ${PREFIX}pixel
 ▢ • ${PREFIX}cadeia
 ▢ • ${PREFIX}inverter
 ▢ • ${PREFIX}rip

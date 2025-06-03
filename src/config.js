@@ -19,6 +19,10 @@ exports.BOT_NUMBER = "558112345678";
 // Se o seu DDD não for de SP ou do Rio, não coloque o 9 antes do número.
 exports.OWNER_NUMBER = "5521950502020";
 
+// LID do dono do bot.
+// Para obter o LID do dono do bot, use o comando <prefixo>get-lid @marca ou +telefone do dono.
+exports.OWNER_LID = "219999999999999@lid";
+
 // Diretório dos comandos
 exports.COMMANDS_DIR = path.join(__dirname, "commands");
 
@@ -47,3 +51,10 @@ exports.ONLY_GROUP_ID = "";
 
 // Diretório base do projeto.
 exports.BASE_DIR = path.resolve(__dirname);
+
+// Caso queira usar proxy.
+exports.PROXY_PROTOCOL = "http";
+exports.PROXY_HOST = "ip";
+exports.PROXY_PORT = "porta";
+exports.PROXY_USERNAME = "usuário";
+exports.PROXY_PASSWORD = "senha";

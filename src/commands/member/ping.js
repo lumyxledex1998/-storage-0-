@@ -8,29 +8,17 @@ module.exports = {
   description: "Verifica se estou online e tempo de atividade",
   commands: ["ping", "pong"],
   usage: `${PREFIX}ping`,
-  handle: async ({ sendReply, sendReact, commandName }) => {
-    try {
-      const startTime = performance.now();
-      await sendReact("🏓");
-      const endTime = performance.now();
-      
-      const pingTime = endTime - startTime;
-      const uptime = formatUptime(process.uptime());
-      
-      const [value, unit] = pingTime < 1 ? 
-        [pingTime.toFixed(3), 'ms'] : 
-        [(pingTime / 1000).toFixed(3), 's'];
-      
-      const pingPongText = commandName === "ping" ? "Pong!" : "Ping!";
-      
-      await sendReply(
-        `🏓 ${pingPongText}\n\n` +
-        `⏱️ *Online ah*: ${uptime}\n` +
-        `⚡ *Tempo de resposta*: ${value} ${unit}`
-      );
-    } catch (error) {
-      console.error('Erro no comando ping:', error);
-      await sendReply('❌ Ocorreu um erro ao verificar meu status.');
-    }
+  handle: async ({ sendReply, sendReact }) => {
+    const start = Date.now();
+    await sendReact("🏓");
+    const uptime = process.uptime();
+    const h = Math.floor(uptime / 3600);
+    const m = Math.floor((uptime % 3600) / 60);
+    const s = Math.floor(uptime % 60);
+    const ping = Date.now() - start;
+    await sendReply(`🏓 Pong!
+
+📶 Velocidade de resposta: ${ping}ms\n⏱️ Uptime: ${h}h ${m}m ${s}s`);
+>>>>>>> main
   },
 };
