@@ -15,6 +15,7 @@ const { loadCommonFunctions } = require("../utils/loadCommonFunctions");
 const { onGroupParticipantsUpdate } = require("./onGroupParticipantsUpdate");
 const { errorLog } = require("../utils/logger");
 const { badMacHandler } = require("../utils/badMacHandler");
+const { checkMutedUser } = require("../utils/checkMutedUser");
 
 exports.onMessagesUpsert = async ({ socket, messages, groupCache }) => {
   if (!messages.length) {
@@ -46,6 +47,16 @@ exports.onMessagesUpsert = async ({ socket, messages, groupCache }) => {
         });
       } else {
         const commonFunctions = loadCommonFunctions({ socket, webMessage });
+
+        const wasDeleted = await checkMutedUser({
+          socket,
+          webMessage,
+          developerDebug: process.env.NODE_ENV !== 'production'
+        });
+
+        if (wasDeleted) {
+          continue;
+        }
 
         if (!commonFunctions) {
           continue;

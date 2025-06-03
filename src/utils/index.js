@@ -11,6 +11,7 @@ const { writeFile } = require("fs/promises");
 const readline = require("node:readline");
 const axios = require("axios");
 const { errorLog } = require("./logger");
+const { exec } = require("child_process");
 
 exports.question = (message) => {
   const rl = readline.createInterface({
@@ -328,6 +329,56 @@ exports.getLastTimestampCreds = () => {
   );
 
   return credsJson.lastAccountSyncTimestamp;
+};
+
+exports.isAnimatedSticker = async (filePath) => {
+  return new Promise((resolve) => {
+    exec(`ffprobe -v quiet -show_entries format=duration -of csv="p=0" "${filePath}"`, (error, stdout) => {
+      if (error) {
+        resolve(false);
+        return;
+      }
+      const duration = parseFloat(stdout.trim());
+      resolve(duration > 0);
+    });
+  });
+};
+
+exports.processStaticSticker = async (inputPath, metadata, addStickerMetadata) => {
+  const stickerBuffer = await fs.promises.readFile(inputPath);
+  return await addStickerMetadata(stickerBuffer, metadata);
+};
+
+exports.processAnimatedSticker = async (inputPath, metadata, addStickerMetadata) => {
+  return new Promise((resolve, reject) => {
+    const tempOutputPath = path.resolve(TEMP_DIR, getRandomName("webp"));
+
+    const ffmpegCmd = `ffmpeg -i "${inputPath}" -vcodec libwebp -lossless 1 -loop 0 -preset default -an -vsync 0 "${tempOutputPath}"`;
+
+    exec(ffmpegCmd, async (error) => {
+      try {
+        if (error) {
+          console.error("Erro no ffmpeg:", error);
+          reject(new Error("Erro ao processar figurinha animada."));
+          return;
+        }
+
+        const processedBuffer = await fs.promises.readFile(tempOutputPath);
+        const finalPath = await addStickerMetadata(processedBuffer, metadata);
+
+        if (fs.existsSync(tempOutputPath)) {
+          fs.unlinkSync(tempOutputPath);
+        }
+
+        resolve(finalPath);
+      } catch (err) {
+        if (fs.existsSync(tempOutputPath)) {
+          fs.unlinkSync(tempOutputPath);
+        }
+        reject(err);
+      }
+    });
+  });
 };
 
 exports.GROUP_PARTICIPANT_ADD = 27;

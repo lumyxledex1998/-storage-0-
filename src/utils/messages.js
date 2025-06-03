@@ -24,6 +24,8 @@ exports.menuMessage = () => {
 ╭━━⪩ DONO ⪨━━
 ▢
 ▢ • ${PREFIX}get-id
+▢ • ${PREFIX}fechar-sugestao
+▢ • ${PREFIX}exec
 ▢ • ${PREFIX}off
 ▢ • ${PREFIX}on
 ▢
@@ -38,6 +40,9 @@ exports.menuMessage = () => {
 ▢ • ${PREFIX}exit (1/0)
 ▢ • ${PREFIX}fechar
 ▢ • ${PREFIX}hidetag
+▢ • ${PREFIX}agendar-mensagem
+▢ • ${PREFIX}mute
+▢ • ${PREFIX}unmute
 ▢ • ${PREFIX}limpar
 ▢ • ${PREFIX}promover
 ▢ • ${PREFIX}rebaixar
@@ -54,6 +59,10 @@ exports.menuMessage = () => {
 ▢ • ${PREFIX}get-lid
 ▢ • ${PREFIX}google-search
 ▢ • ${PREFIX}perfil
+▢ • ${PREFIX}fake-chat
+▢ • ${PREFIX}rename
+▢ • ${PREFIX}to-hd
+▢ • ${PREFIX}sugestao
 ▢ • ${PREFIX}ping
 ▢ • ${PREFIX}raw-message
 ▢ • ${PREFIX}sticker
@@ -80,6 +89,7 @@ exports.menuMessage = () => {
 ▢ • ${PREFIX}jantar
 ▢ • ${PREFIX}lutar
 ▢ • ${PREFIX}matar
+▢ • ${PREFIX}rolar-dado
 ▢ • ${PREFIX}socar
 ▢
 ╰━━─「🎡」─━━
@@ -96,6 +106,10 @@ exports.menuMessage = () => {
 ╭━━⪩ CANVAS ⪨━━
 ▢
 ▢ • ${PREFIX}bolsonaro
+▢ • ${PREFIX}blur
+▢ • ${PREFIX}espelhar
+▢ • ${PREFIX}gray
+▢ • ${PREFIX}pixel
 ▢ • ${PREFIX}cadeia
 ▢ • ${PREFIX}inverter
 ▢ • ${PREFIX}rip

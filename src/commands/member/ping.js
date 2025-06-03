@@ -5,12 +5,16 @@ module.exports = {
   description: "Verificar se o bot está online",
   commands: ["ping"],
   usage: `${PREFIX}ping`,
-  /**
-   * @param {CommandHandleProps} props
-   * @returns {Promise<void>}
-   */
   handle: async ({ sendReply, sendReact }) => {
+    const start = Date.now();
     await sendReact("🏓");
-    await sendReply(`🏓 Pong!`);
+    const uptime = process.uptime();
+    const h = Math.floor(uptime / 3600);
+    const m = Math.floor((uptime % 3600) / 60);
+    const s = Math.floor(uptime % 60);
+    const ping = Date.now() - start;
+    await sendReply(`🏓 Pong!
+
+📶 Velocidade de resposta: ${ping}ms\n⏱️ Uptime: ${h}h ${m}m ${s}s`);
   },
 };
