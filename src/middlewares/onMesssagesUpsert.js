@@ -16,7 +16,7 @@ const { onGroupParticipantsUpdate } = require("./onGroupParticipantsUpdate");
 const { errorLog } = require("../utils/logger");
 const { badMacHandler } = require("../utils/badMacHandler");
 const { checkIfMemberIsMuted } = require("../utils/database");
-const { messageCounter } = require("./messageCounter"); // Adicione esta linha para importar o middleware
+const { messageCounter } = require("./messageCounter");
 
 exports.onMessagesUpsert = async ({
     socket,
@@ -30,7 +30,6 @@ exports.onMessagesUpsert = async ({
 
     for (const webMessage of messages) {
         try {
-            // Chama o messageCounter para contar a mensagem do membro
             messageCounter(webMessage);
 
             const timestamp = webMessage.messageTimestamp;
