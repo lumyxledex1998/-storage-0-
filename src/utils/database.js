@@ -13,6 +13,7 @@ const databasePath = path.resolve(__dirname, "..", "..", "database");
 const ANTI_LINK_GROUPS_FILE = "anti-link-groups";
 const AUTO_RESPONDER_FILE = "auto-responder";
 const AUTO_RESPONDER_GROUPS_FILE = "auto-responder-groups";
+const ABSENCE_FILE = "absences";
 const EXIT_GROUPS_FILE = "exit-groups";
 const GROUP_RESTRICTIONS_FILE = "group-restrictions";
 const INACTIVE_GROUPS_FILE = "inactive-groups";
@@ -433,4 +434,50 @@ exports.removeAutoResponderItemByKey = (key) => {
   writeJSON(filename, responses, []);
 
   return true;
+};
+
+exports.checkUserAbsence = (groupId, userId, callback) => {
+  fs.readFile(ABSENCE_FILE, "utf-8", (error, data) => {
+    if (error) {
+      if (error.code === 'ENOENT') return callback(null, null);
+      return callback(error);
+    }
+
+    try {
+      const absences = JSON.parse(data);
+      const result = absences[groupId] && absences[groupId][userId]
+        ? absences[groupId][userId]
+        : null;
+      callback(null, result);
+    } catch (parseError) {
+      callback(parseError);
+    }
+  });
+};
+
+exports.removeUserAbsence = (groupId, userId, callback) => {
+  fs.readFile(ABSENCE_FILE, "utf-8", (error, data) => {
+    if (error) return callback(error);
+
+    try {
+      const absences = JSON.parse(data);
+
+      if (!absences[groupId] || !absences[groupId][userId]) {
+        return callback(null, false);
+      }
+
+      delete absences[groupId][userId];
+
+      if (Object.keys(absences[groupId]).length === 0) {
+        delete absences[groupId];
+      }
+
+      fs.writeFile(ABSENCE_FILE, JSON.stringify(absences, null, 2), (writeError) => {
+        if (writeError) return callback(writeError);
+        callback(null, true);
+      });
+    } catch (parseError) {
+      callback(parseError);
+    }
+  });
 };

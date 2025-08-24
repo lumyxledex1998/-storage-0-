@@ -77,6 +77,11 @@ declare global {
      * Prefixo do bot configurado.
      */
     prefix: string;
+    
+    /**
+     * nome da pessoa que enviou a mensagem.
+     */
+    pushName: string;
 
     /**
      * ID do grupo/usuário que está recebendo a mensagem.

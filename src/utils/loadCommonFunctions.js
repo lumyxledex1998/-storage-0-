@@ -27,6 +27,7 @@ exports.loadCommonFunctions = ({ socket, webMessage }) => {
     remoteJid,
     replyJid,
     userJid,
+    pushName,
   } = extractDataFromMessage(webMessage);
 
   if (!remoteJid) {
@@ -716,6 +717,7 @@ exports.loadCommonFunctions = ({ socket, webMessage }) => {
     isSticker,
     isVideo,
     prefix,
+    pushName,
     remoteJid,
     replyJid,
     socket,

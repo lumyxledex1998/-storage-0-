@@ -27,6 +27,7 @@ module.exports = {
     sendSuccessReact,
     sendStickerFromFile,
     userJid,
+    pushName,
   }) => {
     if (!isImage && !isVideo) {
       throw new InvalidParameterError(
@@ -36,13 +37,8 @@ module.exports = {
 
     await sendWaitReact();
 
-    const username =
-      webMessage.pushName ||
-      webMessage.notifyName ||
-      userJid.replace(/@s.whatsapp.net/, "");
-
     const metadata = {
-      username: username,
+      username: pushName,
       botName: `${BOT_EMOJI} ${BOT_NAME}`,
     };
 

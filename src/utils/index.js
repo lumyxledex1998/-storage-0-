@@ -22,6 +22,7 @@ exports.question = (message) => {
 };
 
 exports.extractDataFromMessage = (webMessage) => {
+  const pushName = webMessage?.pushName;
   const textMessage = webMessage.message?.conversation;
   const extendedTextMessage = webMessage.message?.extendedTextMessage;
   const extendedTextMessageText = extendedTextMessage?.text;
@@ -45,6 +46,7 @@ exports.extractDataFromMessage = (webMessage) => {
       remoteJid: null,
       replyJid: null,
       userJid: null,
+      pushName,
     };
   }
 
@@ -76,6 +78,7 @@ exports.extractDataFromMessage = (webMessage) => {
     remoteJid: webMessage?.key?.remoteJid,
     replyJid,
     userJid,
+    pushName,
   };
 };
 
